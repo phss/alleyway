@@ -17,3 +17,7 @@ class Pad
   end
 
 end
+
+
+class Ball
+end
