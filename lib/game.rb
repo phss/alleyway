@@ -3,9 +3,9 @@ require 'gosu'
 
 class GameWindow < Gosu::Window
   def initialize
-   super(400, 640, false)
+    super(400, 640, false)
     self.caption = "Alleyway"
- end
+  end
 
   def update
   end
