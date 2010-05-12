@@ -1,12 +1,9 @@
-require "math"
 PAD_VELOCITY = 10
 
-class Pad
-  attr_reader :position, :width, :height
+class Pad < GameObject
 
   def initialize(x, y)
-    @position = Point.at(x, y)
-    @width, @height = 200, 40
+    super(Point.at(x, y), 200, 40)
   end
 
   def move_left
@@ -20,5 +17,10 @@ class Pad
 end
 
 
-class Ball
+class Ball < GameObject
+
+  def initialize(position)
+    super(position, 10, 10)
+  end
+
 end

@@ -2,30 +2,36 @@ require File.dirname(__FILE__) + "/../spec_helper"
 
 describe "Point" do
 
-  before :each do
-    @point = Point.at(13, 36)
-  end
-
   it "should have a position when initialized" do
-    @point.x.should == 13
-    @point.y.should == 36
+    point = Point.at(13, 36)
+    point.y.should == 36
+    point.x.should == 13
   end
 
-  it "should translate the point into a new adjusted point" do
-    adjusted_point = @point.translate(-6, 13)    
+  describe "(translation)" do
+    [{:x => 0,  :y => 0},
+     {:x => 12, :y => 20},
+     {:x => -5, :y => -30}].each do |setup|
 
-    adjusted_point.x.should == 7
-    adjusted_point.y.should == 49
-    @point.x.should == 13
-    @point.y.should == 36
+      it "should translate (#{setup[:x]}, #{setup[:y]}) and return a new adjusted point" do
+        point = Point.at(0, 0)
+        adjusted_point = point.translate(setup[:x], setup[:y])    
+
+        adjusted_point.x.should == setup[:x]
+        adjusted_point.y.should == setup[:y]
+        point.x.should == 0
+        point.y.should == 0
+      end
+ 
+      it "should translate! (#{setup[:x]}, #{setup[:y]}) and modify the point" do
+        point = Point.at(0, 0)
+        point.translate!(setup[:x], setup[:y])
+
+        point.x.should == setup[:x]
+        point.y.should == setup[:y]
+      end
+
+    end
   end
-
-  it "should translate! the point" do
-    @point.translate!(-6, 13)    
-
-    @point.x.should == 7
-    @point.y.should == 49
-  end
-
 end
 
