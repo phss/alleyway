@@ -1,19 +1,20 @@
+require "math"
 PAD_VELOCITY = 10
 
 class Pad
-  attr_reader :x, :y, :width, :height
+  attr_reader :point, :width, :height
 
   def initialize(x, y)
-    @x, @y = x, y
+    @point = Point.at(x, y)
     @width, @height = 200, 40
   end
 
   def move_left
-    @x -= PAD_VELOCITY
+    @point.translate!(-PAD_VELOCITY, 0)
   end
 
   def move_right
-    @x += PAD_VELOCITY
+    @point.translate!(PAD_VELOCITY, 0)
   end
 
 end
