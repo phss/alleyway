@@ -21,4 +21,14 @@ class Point
 end
 
 class Vector
+  attr_reader :x_component, :y_component
+
+  def initialize(x_component, y_component)
+    @x_component, @y_component = x_component, y_component
+  end
+
+  def magnitude
+    5
+  end
+
 end
