@@ -35,6 +35,14 @@ class Vector
     @x_component, @y_component = x_component, y_component
   end
 
+  def self.from_components(x, y)
+    Vector.new(x, y)
+  end
+
+  def self.from_angle(radian, magnitude)
+    Vector.from_components(Math.cos(radian), Math.sin(radian)).scale(magnitude)
+  end
+
   def magnitude
     Math.hypot(@x_component, @y_component)
   end
