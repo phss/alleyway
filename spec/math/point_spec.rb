@@ -9,28 +9,52 @@ describe "Point" do
   end
 
   describe "(translation)" do
+    before :each do
+      @point = Point.at(0, 0)
+    end
+
+    it "should translate relative to current coordinates" do
+      point = Point.at(10, -53)
+      point.translate!(-20, 12)
+
+      verify(point, -10, -41)
+    end
+
     [{:x => 0,  :y => 0},
      {:x => 12, :y => 20},
      {:x => -5, :y => -30}].each do |setup|
 
       it "should translate (#{setup[:x]}, #{setup[:y]}) and return a new adjusted point" do
-        point = Point.at(0, 0)
-        adjusted_point = point.translate(setup[:x], setup[:y])    
+        adjusted_point = @point.translate(setup[:x], setup[:y])    
 
-        adjusted_point.x.should == setup[:x]
-        adjusted_point.y.should == setup[:y]
-        point.x.should == 0
-        point.y.should == 0
+        verify(adjusted_point, setup[:x], setup[:y])
+        verify(@point, 0, 0)
       end
  
       it "should translate! (#{setup[:x]}, #{setup[:y]}) and modify the point" do
-        point = Point.at(0, 0)
-        point.translate!(setup[:x], setup[:y])
+        @point.translate!(setup[:x], setup[:y])
 
-        point.x.should == setup[:x]
-        point.y.should == setup[:y]
+        verify(@point, setup[:x], setup[:y])
+      end
+      
+      it "should vector translate (#{setup[:x]}, #{setup[:y]}) and return a new adjusted point" do
+        adjusted_point = @point.vector_translate(Vector.new(setup[:x], setup[:y]))
+
+        verify(adjusted_point, setup[:x], setup[:y])
+        verify(@point, 0, 0)
+      end
+ 
+      it "should vector translate! (#{setup[:x]}, #{setup[:y]}) and modify the point" do
+        @point.vector_translate!(Vector.new(setup[:x], setup[:y]))
+
+        verify(@point, setup[:x], setup[:y])
       end
 
+    end
+
+    def verify(point, expected_x, expected_y)
+      point.x.should == expected_x
+      point.y.should == expected_y
     end
   end
 end

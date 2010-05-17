@@ -21,6 +21,15 @@ class Ball < GameObject
 
   def initialize(position)
     super(position, 10, 10)
+    @velocity = Vector.new(6, 8)
+  end
+
+  def speed
+    @velocity.magnitude
+  end
+
+  def move
+    @position.vector_translate!(@velocity)
   end
 
 end

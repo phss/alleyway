@@ -18,6 +18,14 @@ class Point
     @y += y
     self
   end
+
+  def vector_translate(vector)
+    translate(vector.x_component, vector.y_component)
+  end
+
+  def vector_translate!(vector)
+    translate!(vector.x_component, vector.y_component)
+  end
 end
 
 class Vector
@@ -28,7 +36,17 @@ class Vector
   end
 
   def magnitude
-    5
+    Math.hypot(@x_component, @y_component)
+  end
+
+  def scale(scalar)
+    Vector.new(@x_component, @y_component).scale!(scalar)
+  end
+
+  def scale!(scalar)
+    @x_component *= scalar
+    @y_component *= scalar
+    return self
   end
 
 end
